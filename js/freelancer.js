@@ -19,7 +19,7 @@
     });
 
     // Closes the Responsive Menu on Menu Item Click
-    $('.navbar-collapse ul li a').click(function(){ 
+    $('.navbar-collapse ul li a').click(function(){
             $('.navbar-toggle:visible').click();
     });
 
@@ -29,6 +29,11 @@
             top: 100
         }
     })
+
+    // bind click event handler to Soundcloud image (Sn0wcrash page)
+    $("#soundcloud").click(function() {
+      window.location.href = 'https://soundcloud.com/sn0wcrash_sounds';
+    });
 
     // Floating label headings for the contact form
     $(function() {
