@@ -19,7 +19,7 @@ a:focus,
 a:active,
 a.active {
   /* color: #18BC9C; */
-  color: #7DD1EB;
+  color: #46A8CF;
 }
 h1,
 h2,
@@ -198,8 +198,8 @@ section h2 {
   margin: 0;
   font-size: 3em;
 }
-section.success {
-  background: #4494E2;
+section.success { /* this is the about section */
+  background: #3A38B1;
   /* background: #18BC9C; */
   color: white;
 }
