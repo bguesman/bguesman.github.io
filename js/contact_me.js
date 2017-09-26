@@ -21,7 +21,7 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                url: "../mail/contact_me.php",
+                url: "//formspree.io/james_guesman@brown.edu",
                 type: "POST",
                 data: {
                     name: name,
