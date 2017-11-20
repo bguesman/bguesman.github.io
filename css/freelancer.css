@@ -74,10 +74,10 @@ header {
   /* background: #18BC9C; */
   /* background: #4494E2; */
   background: blueviolet; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, #BB00E2, #00A6FF); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #BB00E2, #00A6FF); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #BB00E2, #00A6FF); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #BB00E2, #00A6FF); /* Standard syntax */
+  background: -webkit-linear-gradient(left top, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* Standard syntax */
   color: white;
 }
 header .container {
@@ -320,10 +320,10 @@ footer .footer-above {
   padding-top: 50px;
   /* background-color: rgb(25, 52, 102); */
   background: blueviolet; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, #2893EB, #B33ECE); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #2893EB, #B33ECE); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #2893EB, #B33ECE); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #2893EB, #B33ECE); /* Standard syntax */
+  background: -webkit-linear-gradient(left top, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* Standard syntax */
 }
 footer .footer-col {
   margin-bottom: 50px;
