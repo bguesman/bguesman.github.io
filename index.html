@@ -75,7 +75,7 @@
     <div class="container" id="maincontent" tabindex="-1">
       <div class="row">
         <div class="col-lg-12">
-          <img class="img-responsive" style="width:35%;height:35%" src="img/Brad-Portrait-2-pink-semi-wash.png" alt="">
+          <img class="img-responsive" style="width:35%;height:35%" src="img/Brad-Portrait-1-pink-cooler-filter.png" alt="">
           <div class="intro-text">
             <h1 class="name">Brad Guesman</h1>
             <!-- <hr class="star-light"> -->
@@ -97,6 +97,17 @@
         </div>
       </div>
       <div class="row">
+        <!-- Replicant Delay -->
+        <div class="col-sm-4 portfolio-item">
+            <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+              <div class="caption">
+                <div class="caption-content">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img src="img/portfolio/replicantdelay/upper-left.png" class="img-responsive">
+            </a>
+          </div>
         <!-- Singularity -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
@@ -119,6 +130,8 @@
             <img src="img/portfolio/snowcrash/album_cover_cropped.jpg" class="img-responsive">
           </a>
         </div>
+      </div>
+      <div class="row">
         <!-- LED Light Installation -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
@@ -128,19 +141,6 @@
               </div>
             </div>
             <img src="img/portfolio/ledlightinstallation/groupshot_1.jpg" class="img-responsive">
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Escape -->
-        <div class="col-sm-4 portfolio-item">
-          <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-            <div class="caption">
-              <div class="caption-content">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img src="img/portfolio/thirtysevenp/groupshot.jpg" class="img-responsive">
           </a>
         </div>
          <!-- Brown CS33 Projects -->
@@ -164,6 +164,19 @@
             </div>
             <img src="img/portfolio/introcs/game-resize.png" class="img-responsive">
           </a>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Escape -->
+        <div class="col-sm-4 portfolio-item">
+            <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+              <div class="caption">
+                <div class="caption-content">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img src="img/portfolio/thirtysevenp/groupshot.jpg" class="img-responsive">
+            </a>
         </div>
       </div>
     </div>
@@ -587,6 +600,40 @@
         </div>
       </div>
     </div>
+
+    <!-- Replicant Delay -->
+    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl">
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-2">
+                <div class="modal-body">
+                  <h2>The Replicant Delay</h2>
+                  <h3>Analog delay simulation, built with the WDL-OL framework.</h3>
+                  <hr class="star-primary">
+                  <img src="img/portfolio/replicantdelay/full.png" class="img-responsive img-centered" alt="">
+                  <p align="left">After completing <a href="http://www.martin-finke.de/blog/articles/audio-plugins-001-introduction/">Martin Finke's tutorial</a> on designing and building audio plugins with Oli Larkin's WDL-OL interace, I decided to try my hand at writing my own.</p>
+                  <p align="left">"The Replicant" Analog Delay Engine is meant to emulate the sound and color of old school analog delay circuits. It sports some key features to this end—rich channel-independent modulation, distortion that can be shaped with hi-pass and low-pass filters, and "analog" meters that mimick the repeat to repeat high frequency loss present in classic analog delay units.</p>
+                  <p align="left">Despite having a vintage sound color, the Replicant is designed to fit comfortably into a modern production workflow. Features like tempo sync of delay time and modulation, tap tempo, and L/R sync for each control allow for the precision you'd expect from a modern effects unit.</p>
+                  <p align="left">From a development standpoint, I ran into quite a few stumbling blocks before getting to the finished product.</p>
+                  <p align="left">For one, I was bogged down for quite a while by some digital artifacts that would come through when the delay time was modulated. Ultimately, the solution to getting rid of these (and the key to thick, continuous modulation capability), was utilizing interpolation to cope with fractional delay times. Utilizing linear interpolation improved the problem, but ultimately I ended up utilizing Hermite (polynomial) interpolation to completely eradicate the artifacts.</p>
+                  <p align="left">I also encountered issues when attempting to implement classic analog delay feedback loop functionality. It was pretty apparent that to get baseline functionality, content already in the delay buffer had to be resampled, resulting in that swooshing time strecthing sound that anyone with a delay stompbox knows so well.</p>
+                  <p align="left">The problem with this implementation—and it was quite a problem—was that it sounded awful. Harsh digital artifacts and aliasing abounded. I tried quite a few solutions before hitting on the correct one: applying a smoothing algorithm while resampling the existing buffer. Even within this solution there was room for experimentation; after testing a few different methods, I (to my surprise) found that a single pass-through with a simple 3-point algorithm sounded best.</p>
+                  <p align="left">A goal from the beginning was to make the plugin skinnable—and it's still just that, a goal. WDL-OL, for all its usefulness, does not have great support for GUI manipulation. Perhaps in a future build, I'd like to return to this problem and find a good way to solve it.</p>
+                  <p align="left">Want to see the code? Shoot me a message and I'll give you access to the <a href="https://github.com/bguesman/ReplicantDelay">github</a>.</p>
+                  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!-- jQuery -->
 <script src="vendor/jquery/jquery.min.js"></script>
