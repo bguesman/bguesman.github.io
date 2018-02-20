@@ -143,6 +143,17 @@
             <img src="img/portfolio/ledlightinstallation/groupshot_1.jpg" class="img-responsive">
           </a>
         </div>
+        <!-- Planetary Motion Sim -->
+        <div class="col-sm-4 portfolio-item">
+          <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
+            <div class="caption">
+              <div class="caption-content">
+                <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="img/portfolio/planetary-motion-sim/random_3.png" class="img-responsive">
+          </a>
+        </div>
          <!-- Brown CS33 Projects -->
          <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
@@ -152,17 +163,6 @@
               </div>
             </div>
             <img src="img/portfolio/cs33/33sh_screencap.png" class="img-responsive">
-          </a>
-        </div>
-        <!-- Brown Intro CS Projects -->
-        <div class="col-sm-4 portfolio-item">
-          <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-            <div class="caption">
-              <div class="caption-content">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img src="img/portfolio/introcs/game-resize.png" class="img-responsive">
           </a>
         </div>
       </div>
@@ -177,6 +177,17 @@
               </div>
               <img src="img/portfolio/thirtysevenp/groupshot.jpg" class="img-responsive">
             </a>
+        </div>
+        <!-- Brown Intro CS Projects -->
+        <div class="col-sm-4 portfolio-item">
+          <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+            <div class="caption">
+              <div class="caption-content">
+                <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="img/portfolio/introcs/game-resize.png" class="img-responsive">
+          </a>
         </div>
       </div>
     </div>
@@ -581,7 +592,7 @@
                 <h3 align="left">Shell</h3>
                 <h4 align="left">Language: C</h4>
                 <p align="left">A big chunk of the course focused on the concept of the shell. This culminated in the "shell" project, where we were tasked with writing our own c-shell. The shell supports input and output redirection, signal handling, foreground/background process management, and a few commands (i.e. cd, rm).</p>
-  
+
                 <h3 align="left">Malloc</h3>
                 <h4 align="left">Language: C</h4>
                 <p align="left">One of the final projects of the course was to implement a dynamic memory allocator; effectively to reimplement the standard library functions malloc, free, and realloc. I employed a first-fit algorithm, with an optimization that allowed free blocks to be coalesced together, reducing internal fragmentation.</p>
@@ -634,6 +645,34 @@
           </div>
         </div>
       </div>
+
+      <!-- Planetary Motion Sim -->
+      <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+              <div class="lr">
+                <div class="rl">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                  <div class="modal-body">
+                    <h2>Planetary Motion Sim</h2>
+                    <h3>A fun and colorful simulation of Newtonian gravitation.</h3>
+                    <hr class="star-primary">
+                    <img src="img/portfolio/planetary-motion-sim/random_2.png" class="img-responsive img-centered" alt="">
+                    <p align="left">I had the idea to do a simulation of Newtonian gravity in VR using AFrame.io, but figured it would be a good idea to implement it as a 2-D project first and work out the kinks in that environment first.</p>
+                    <p align="left">For the modelling element, the program is spartan enough that all the computing can be done client side. For the graphics element, I used p5.js. Stay tuned for a webVR rehash.</p>
+                    <p align="left">Want to see the code? Check it out on <a href="https://github.com/bguesman/planetary-motion-sim">github</a>.</p>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 <!-- jQuery -->
 <script src="vendor/jquery/jquery.min.js"></script>
