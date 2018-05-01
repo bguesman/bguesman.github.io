@@ -97,6 +97,17 @@
         </div>
       </div>
       <div class="row">
+        <!-- Constructing Constructibles -->
+        <div class="col-sm-4 portfolio-item">
+            <a href="#portfolioModal10" class="portfolio-link" data-toggle="modal">
+              <div class="caption">
+                <div class="caption-content">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img src="img/portfolio/constructing-constructibles/screenshot.png" class="img-responsive">
+            </a>
+          </div>
         <!-- Musicfind -->
         <div class="col-sm-4 portfolio-item">
             <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
@@ -119,6 +130,8 @@
               <img src="img/portfolio/replicantdelay/upper-left.png" class="img-responsive">
             </a>
           </div>
+      </div>
+      <div class="row">
         <!-- Singularity -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
@@ -130,8 +143,6 @@
             <img src="img/portfolio/snowcrash/Snowcrash-Project-2-Cover-FINAL-cropped.png" class="img-responsive" alt="Cabin">
           </a>
         </div>
-      </div>
-      <div class="row">
         <!-- U. V. Captcha-->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
@@ -154,6 +165,8 @@
             <img src="img/portfolio/ledlightinstallation/groupshot_1.jpg" class="img-responsive">
           </a>
         </div>
+      </div>
+      <div class="row">
         <!-- Planetary Motion Sim -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
@@ -165,8 +178,6 @@
             <img src="img/portfolio/planetary-motion-sim/random_3.png" class="img-responsive">
           </a>
         </div>
-      </div>
-      <div class="row">
          <!-- Brown CS33 Projects -->
          <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
@@ -189,6 +200,8 @@
               <img src="img/portfolio/thirtysevenp/groupshot.jpg" class="img-responsive">
             </a>
         </div>
+      </div>
+      <div class="row">
         <!-- Brown Intro CS Projects -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
@@ -716,6 +729,39 @@
               </div>
             </div>
           </div>
+
+          <!-- Constructing Constructibles -->
+          <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                  <div class="lr">
+                    <div class="rl">
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <div class="modal-body">
+                        <h2>Constructing Constructibles</h2>
+                        <h3>Visualizing a classic mathematical result with p5.js</h3>
+                        <hr class="star-primary">
+                        <img src="img/portfolio/constructing-constructibles/big-screenshot.png" class="img-responsive img-centered" alt="">
+                        <p align="left">This was a project for a course I took second semester sophomore year that focused on Galois Theory—in short, the study of the relationship between groups, fields, and polynomials. I worked with some friends here at Brown—David Halpern and Adam Shelby—over the course of about a week and a half to put it together.</p>
+                        <p align="left">One of the topics we covered was the notion of constructibility. A question of interest to the geometers of classical times was "what numbers can you construct with a compass and a straight edge"? In other words, starting with the points (0, 0) and (1, 0) in the plane and allowing yourself to only draw a finite number of lines between two points and circles with center at one point and intersecting another, what points in the plane can you get to?</p>
+                        <p align="left">This may seem like a trivial question, but it turns out that it is not so easy to answer. In fact, it wasn't shown until 1796 that the regular 17-gon was constructible (by Gauss, when he was 18, naturally). To provide a true criterion for constructibility, one has to draw a connection between the idea of "geometrically constructible" and "algebraically constructible".</p>
+                        <p align="left">We've already mentioned what it means to be geometrically constructible. An algebraically constructible number is one which can be constructed from performing field operations (addition, multiplication, subtraction, division) and a finite number of square roots with rational numbers. If you know some algebra, you'll recognize this as performing successive field extensions to the rationals.</p>
+                        <p align="left">We won't go into the proof here, but it turns out that these two definitions are actually the same—this is because there is an algorithm for performing field operations and taking square roots in the plane, and this algorithm involves only drawing lines and circles, starting with two rational points.</p>
+                        <p align="left">So what does this website do? It visualizes this construction process. You enter an algebraically constructible number, and it will draw out the geometric construction process for you!</p>
+                        <p align="left">This project lives on the web! You can find it <a href="https://dhalper1.github.io/Constructing_Constructibles/web/index.html">here</a>.</p>
+                        <p align="left">Want to see the code? Check it out on <a href="https://github.com/dhalper1/Constructing_Constructibles">github</a>.</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 <!-- jQuery -->
 <script src="vendor/jquery/jquery.min.js"></script>
