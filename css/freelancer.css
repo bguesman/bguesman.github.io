@@ -74,10 +74,15 @@ header {
   /* background: #18BC9C; */
   /* background: #4494E2; */
   background: blueviolet; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* Standard syntax */
+  /* background: -webkit-linear-gradient(left top, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Safari 5.1 to 6.0 */
+  /* background: -o-linear-gradient(bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Opera 11.1 to 12.0 */
+  /* background: -moz-linear-gradient(bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* For Firefox 3.6 to 15 */
+  /* background: linear-gradient(to bottom right, rgb(188, 0, 235), rgb(0, 74, 185)); /* Standard syntax */
+  /* background: #3A38B1; */
+  background: -webkit-linear-gradient(left top, rgb(47, 139, 198), rgb(112, 43, 193)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, rgb(47, 139, 198), rgb(112, 43, 193)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, rgb(47, 139, 198), rgb(112, 43, 193)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, rgb(47, 139, 198), rgb(112, 43, 193)); /* Standard syntax */
   color: white;
 }
 header .container {
@@ -319,11 +324,15 @@ footer h3 {
 footer .footer-above {
   padding-top: 50px;
   /* background-color: rgb(25, 52, 102); */
-  background: blueviolet; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* Standard syntax */
+  /* background: -webkit-linear-gradient(left top, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Safari 5.1 to 6.0 */
+  /* background: -o-linear-gradient(bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Opera 11.1 to 12.0 */
+  /* background: -moz-linear-gradient(bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* For Firefox 3.6 to 15 */
+  /* background: linear-gradient(to bottom right, rgb(0, 74, 185), rgb(188, 0, 235)); /* Standard syntax */
+  background: #3A38B1;
+  background: -webkit-linear-gradient(left top, rgb(115, 60, 204), rgb(47, 139, 198)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, rgb(115, 60, 204), rgb(47, 139, 198)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, rgb(115, 60, 204), rgb(47, 139, 198)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, rgb(115, 60, 204), rgb(47, 139, 198)); /* Standard syntax */
 }
 footer .footer-col {
   margin-bottom: 50px;
