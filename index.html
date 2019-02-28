@@ -97,6 +97,17 @@
         </div>
       </div>
       <div class="row">
+        <!-- Path -->
+        <div class="col-sm-4 portfolio-item">
+            <a href="#portfolioModal14" class="portfolio-link" data-toggle="modal">
+              <div class="caption">
+                <div class="caption-content">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img src="img/portfolio/path-tracing/3200-samples-dof-rescale.png" class="img-responsive">
+            </a>
+          </div>
         <!-- Trees -->
         <div class="col-sm-4 portfolio-item">
             <a href="#portfolioModal13" class="portfolio-link" data-toggle="modal">
@@ -119,6 +130,8 @@
                 <img src="img/portfolio/blender-projects/top-view-crop.png" class="img-responsive">
               </a>
             </div>
+      </div>
+      <div class="row">
         <!-- Ray -->
         <div class="col-sm-4 portfolio-item">
             <a href="#portfolioModal11" class="portfolio-link" data-toggle="modal">
@@ -130,9 +143,6 @@
               <img src="img/portfolio/cs123/light-circle-crop.png" class="img-responsive">
             </a>
           </div>
-      </div>
-      <div class="row">
-
       <!-- Constructing Constructibles -->
       <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal10" class="portfolio-link" data-toggle="modal">
@@ -155,20 +165,20 @@
             <img src="img/portfolio/musicfind/main.png" class="img-responsive">
           </a>
         </div>
-        <!-- Replicant Delay -->
-        <div class="col-sm-4 portfolio-item">
-            <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
-              <div class="caption">
-                <div class="caption-content">
-                  <i class="fa fa-search-plus fa-3x"></i>
-                </div>
-              </div>
-              <img src="img/portfolio/replicantdelay/upper-left.png" class="img-responsive">
-            </a>
-          </div>
-        </div>
-      <div class="row">
+      </div>
 
+      <div class="row">
+        <!-- Replicant Delay -->
+      <div class="col-sm-4 portfolio-item">
+        <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+          <div class="caption">
+            <div class="caption-content">
+              <i class="fa fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="img/portfolio/replicantdelay/upper-left.png" class="img-responsive">
+        </a>
+      </div>
       <!-- Singularity -->
       <div class="col-sm-4 portfolio-item">
         <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
@@ -191,6 +201,8 @@
           <img src="img/portfolio/snowcrash/album_cover_cropped.jpg" class="img-responsive">
         </a>
       </div>
+    </div>
+    <div class="row">
         <!-- LED Light Installation -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
@@ -202,9 +214,6 @@
             <img src="img/portfolio/ledlightinstallation/groupshot_1.jpg" class="img-responsive">
           </a>
         </div>
-      </div>
-      <div class="row">
-
         <!-- Planetary Motion Sim -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
@@ -227,6 +236,8 @@
             <img src="img/portfolio/cs33/33sh_screencap.png" class="img-responsive">
           </a>
         </div>
+    </div>
+    <div class="row">
         <!-- Escape -->
         <div class="col-sm-4 portfolio-item">
             <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
@@ -238,8 +249,6 @@
               <img src="img/portfolio/thirtysevenp/groupshot.jpg" class="img-responsive">
             </a>
         </div>
-      </div>
-      <div class="row">
         <!-- Brown Intro CS Projects -->
         <div class="col-sm-4 portfolio-item">
           <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
@@ -747,6 +756,76 @@
                 <img src="img/portfolio/trees/white-1.png" class="img-responsive img-centered" alt="">
                 <img src="img/portfolio/trees/white-2.png" class="img-responsive img-centered" alt="">
                 <img src="img/portfolio/trees/white-3.png" class="img-responsive img-centered" alt="">
+                <p align="left">Want to see the code? This is a private repo on <a href="https://github.com/bguesman">github</a> for academic code reasons. Contact me and I can give you access!</p>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Path Tracing -->
+    <div class="portfolio-modal modal fade" id="portfolioModal14" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+          <div class="lr">
+            <div class="rl">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+              <div class="modal-body">
+                <h2>Path Tracer</h2>
+                <h3>Physically Accurate Light Transport with C++, Qt, Eigen.</h3>
+                <hr class="star-primary">
+                <img src="img/portfolio/path-tracing/3200-samples-dof.png" class="img-responsive img-centered" alt="">
+                <p align="left">The first project in Brown's CS2240 course, "Advanced Computer Graphics", was to implement a CPU path tracer, a renderer that models physically accurate light transport. The baseline requirements for the project were to implement a basic brute force path tracer that supports 4 kinds of BSDF's: Lambertian, Phong, perfect mirror, and refractive dielectric with Fresnel reflection.</p>
+                <p align="left">Russian-Roulette path termination was a required feature, though it was left
+                up to our discretion how to implement it. I chose to make the termination
+                probability proportional to the square root of the norm of the BSDF, this
+                way paths were more likely to terminate when bouncing off of surfaces that
+                were minimally reflective. However, I had to play around with clamping it
+                within a discrete range to avoid paths that bounce for too long and paths
+                that don't bounce long enough. I ended up clamping it to the range [0.7, 0.9],
+                which empirically produced the images with the least noise.</p>
+                <p align="left">We were also required to implement direct lighting to reduce the noise in
+                our image. All the images below were rendered with direct lighting, because without it the path tracer is almost unusable
+                there's so much noise!</p>
+                <p align="left">I also decided to implement a few extra features. I had initially intended to implement HDR's and some kind of simple denoising
+                algorithm, but got caught up implementing other things instead. There was just
+                too much cool stuff to do! I figured I would start by implementing features that would reduce the variance
+                in my image (that weren't post-processing denoising algorithms), that way I
+                could spend less time rendering tests. I implemented two features toward this
+                end.</p>
+                <p align="left">The first of these was "stratified sampling". This idea is simple: to get a
+                more uniform sample of rays per pixel, divide the pixel into grid cells and
+                sample rays through each grid cell to guarantee that the rays will roughly
+                cover the whole pixel area. As much as I expected the differences to
+                be noticeable, it seems that this sampling method is not really much of
+                an improvement based on the image comparisons.</p>
+                <p align="left">The second was "importance sampling". The idea here is to sample important
+                BSDF directions more, and less important BSDF directions less. This reduces
+                variance in the image. There is a huge difference in noise between the importance/non-importance sampled images, but it's particularly visible when rendering scenes that make use of the phong BRDF. This comparison is a testament to the
+                fact that you really can't even render a clean image of a glossy object without
+                some kind of importance sampling method.</p>
+                <p align="left">I also tried my hand at implementing the Cook-Torrance BSDF, a microfacet
+                model commonly used in PBR workflows (and the one used in Blender's
+                Principled BSDF shader). I used the Beckmann distribution function. I
+                wasn't able to get the importance sampler to work in time, which makes things
+                tough.</p>
+                <p align="left">The final extra feature I implemented was depth of field---it's not so much
+                a physically based model as a hack where I scatter the ray origins around
+                the eye point within some radius (the "aperture") and then move the virtual
+                film plane to where I want to place the focus plane.</p>
+                <img src="img/portfolio/path-tracing/spheres-2000-paths-importance-stratified.png" class="img-responsive img-centered" alt="">
+                <img src="img/portfolio/path-tracing/regular-2000-importance-stratified.png" class="img-responsive img-centered" alt="">
+                <img src="img/portfolio/path-tracing/tree.png" class="img-responsive img-centered" alt="">
+                <img src="img/portfolio/path-tracing/glossy-2000-importance-stratified.png" class="img-responsive img-centered" alt="">
+                <img src="img/portfolio/path-tracing/cook-torrance-2.png" class="img-responsive img-centered" alt="">
                 <p align="left">Want to see the code? This is a private repo on <a href="https://github.com/bguesman">github</a> for academic code reasons. Contact me and I can give you access!</p>
                 <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
               </div>
