@@ -97,6 +97,41 @@
         </div>
       </div>
       <div class="row">
+        <!-- Clouds -->
+        <div class="col-sm-4 portfolio-item">
+          <a href="#portfolioModal17" class="portfolio-link" data-toggle="modal">
+            <div class="caption">
+              <div class="caption-content">
+                <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="img/portfolio/clouds/moody-cover.png" class="img-responsive">
+          </a>
+        </div>
+        <!-- Black Hole Raytracing -->
+        <div class="col-sm-4 portfolio-item">
+          <a href="#portfolioModal16" class="portfolio-link" data-toggle="modal">
+            <div class="caption">
+              <div class="caption-content">
+                <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="img/portfolio/black-holes/stars-3-bh-rescale.png" class="img-responsive">
+          </a>
+        </div>
+        <!-- Geometry Processing -->
+        <div class="col-sm-4 portfolio-item">
+          <a href="#portfolioModal15" class="portfolio-link" data-toggle="modal">
+            <div class="caption">
+              <div class="caption-content">
+                <i class="fa fa-search-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="img/portfolio/geometry-processing/cow-decimate-rescale.png" class="img-responsive">
+          </a>
+        </div>
+      </div>
+      <div class="row">
         <!-- Path -->
         <div class="col-sm-4 portfolio-item">
             <a href="#portfolioModal14" class="portfolio-link" data-toggle="modal">
@@ -702,7 +737,7 @@
                 <img src="img/portfolio/cs123/light-circle.png" class="img-responsive img-centered" alt="">
                 <p align="left">I took Brown's CS1230 "Computer Graphics" course, which is a fast paced introduction to core concepts in 2D and 3D graphics including image processing, 3D modeling/viewing/rendering, and shader programming on the GPU.</p>
                 <p align="left">The culminating assignment (prior to the final project) was to implement a CPU raytracer in C++. We did this in stages, starting with the code to construct and traverse the scenegraph (and render with OGL), then moving on to rendering this scene with a simple non-recursive raytracer, and finally augmenting this raytracer with additional features like recursive reflections, shadows, and texture mapping.</p>
-                <p align="left">I also opted to implement some additional features that interested me. Some were just in the pursuit of making nicer looking images---simple anti-aliasing and brute-force super-sampling were among these.</p>
+                <p align="left">I also opted to implement some additional features that interested me. Some were just in the pursuit of making nicer looking images—simple anti-aliasing and brute-force super-sampling were among these.</p>
                 <p align="left">Others were aimed at speeding up the intersection process. Because ray-tracing is "embarrassingly parallel", I added an option to multithread the rendering process.</p>
                 <p align="left">This was somewhat helpful, but did not improve the efficiency nearly as much as my other optimization: using an axis aligned KD-Tree to cut down on the number of ray intersections necessary to compute for each ray (from O(n) to O(log(n))). Using this feature, images were rendered about four times as quickly (dependent on the number of primitives in the scene, of course).</p>
                 <img src="img/portfolio/cs123/recursive-spheres-4.png" class="img-responsive img-centered" alt="">
@@ -817,7 +852,7 @@
                 Principled BSDF shader). I used the Beckmann distribution function. I
                 wasn't able to get the importance sampler to work in time, which makes things
                 tough.</p>
-                <p align="left">The final extra feature I implemented was depth of field---it's not so much
+                <p align="left">The final extra feature I implemented was depth of field—it's not so much
                 a physically based model as a hack where I scatter the ray origins around
                 the eye point within some radius (the "aperture") and then move the virtual
                 film plane to where I want to place the focus plane.</p>
@@ -852,10 +887,10 @@
                 <h3>Tutorials and Original Work.</h3>
                 <hr class="star-primary">
                 <img src="img/portfolio/blender-projects/top-view.png" class="img-responsive img-centered" alt="">
-                <p align="left">To complement the computer graphics coursework I was doing during my junior fall semester, I decided to learn a 3D modeling program---Blender. Here are some images of some original projects and some tutorials. </p>
+                <p align="left">To complement the computer graphics coursework I was doing during my junior fall semester, I decided to learn a 3D modeling program—Blender. Here are some images of some original projects and some tutorials. </p>
 
                 <h4 align="left">Gibson SG (Original)</h4>
-                <p align="left">I decided to challenge myself to model one of my favorite guitars. Some people might notice that the guitar has an Epiphone headstock---this is because I was working with Epiphone reference photos.</p>
+                <p align="left">I decided to challenge myself to model one of my favorite guitars. Some people might notice that the guitar has an Epiphone headstock—this is because I was working with Epiphone reference photos.</p>
                 <img src="img/portfolio/blender-projects/main-shot.png" class="img-responsive img-centered" alt="">
                 <img src="img/portfolio/blender-projects/head-stock.png" class="img-responsive img-centered" alt="">
                 <img src="img/portfolio/blender-projects/top-down.png" class="img-responsive img-centered" alt="">
@@ -1006,6 +1041,149 @@
                         <p align="left">So what does this website do? It visualizes this construction process. You enter an algebraically constructible number, and it will draw out the geometric construction process for you!</p>
                         <p align="left">This project lives on the web! You can find it <a href="https://dhalper1.github.io/Constructing_Constructibles/web/index.html">here</a>.</p>
                         <p align="left">Want to see the code? Check it out on <a href="https://github.com/dhalper1/Constructing_Constructibles">github</a>.</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Geometry Processing -->
+            <div class="portfolio-modal modal fade" id="portfolioModal15" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                  <div class="lr">
+                    <div class="rl">
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <div class="modal-body">
+                        <h2>Geometry Processing</h2>
+                        <h3>Transformation of meshes with C++ and Eigen.</h3>
+                        <hr class="star-primary">
+                        <img src="img/portfolio/geometry-processing/cow-decimate.png" class="img-responsive img-centered" alt="">
+                        <p align="left">For the second project in Brown's CS224 course, "Advanced Computer Graphics", we were tasked with implementing some fundamental mesh operations: subdivision, greedy decimation using a quadric error metric, and bilateral filtering.</p>
+                        <p align="left">The bulk of the work of the project was bringing up an implementation of an acceleration data structure that allowed for fast mesh editing and traversal. I chose to implement a half-edge data structure, which, though ultimately more challenging to get right than something like a simple adjacency table, allows for cleaner implementations of the unit topology-altering operations necessary to implement the more complex processing algorithms.</p>
+                        <p align="left">In particular, these operations are edge split, edge flip, and edge collapse. These were all fairly straightforward to puzzle out, though they required keeping track of a lot of pointers to implement correctly. Writing these was like something akin to writing a doubly linked-list deletion but ten times more complicated.</p>
+                        <p align="left">Something that's important to note is that the half-edge data structure is only valid if the mesh it represents is "manifold". Roughly, a manifold mesh is one that perfectly encloses a volume. To guarantee this invariant, you need to be sure to prevent operations that destroy it from occuring. Luckily, there are constant time ways of detecting whether one of the three operations above will violate the manifold property.</p>
+                        <p align="left">Here's an example of multiple iterations of bilateral filtering on a high poly but very noisy bunny mesh. Note how the noise disappears, but much of the relevant detail is preserved.</p>
+                        <img src="img/portfolio/geometry-processing/bunny-denoise-text.png" class="img-responsive img-centered" alt="">
+                        <p align="left">Here's an example of multiple rounds of decimation on an initially high-poly cow mesh.</p>
+                        <img src="img/portfolio/geometry-processing/cow-decimate-text.png" class="img-responsive img-centered" alt="">
+                        <p align="left">Here's two examples of subdivision across multiple iterations.</p>
+                        <img src="img/portfolio/geometry-processing/cow-subsurf-text.png" class="img-responsive img-centered" alt="">
+                        <img src="img/portfolio/geometry-processing/ico-subsurf-text.png" class="img-responsive img-centered" alt="">
+                        <p align="left">Want to see the code? This is a private repo on <a href="https://github.com/bguesman">github</a> for academic code reasons. Contact me and I can give you access!</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Black Hole Raytracing -->
+            <div class="portfolio-modal modal fade" id="portfolioModal16" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                  <div class="lr">
+                    <div class="rl">
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <div class="modal-body">
+                        <h2>Black Hole Raytracing</h2>
+                        <h3>Rendering Schwarzschild Black Holes with Python and Numpy</h3>
+                        <hr class="star-primary">
+                        <img src="img/portfolio/black-holes/stars-3-bh.png" class="img-responsive img-centered" alt="">
+                        <p align="left">Raytracing is a classic algorithm that leverages the properties of geometric light transport to calculate very convincing specular reflections. Nearly every student of graphics has implemented raytracing in one form or another—it's arguably the most well-known algorithm in computer graphics.</p>
+                        <p align="left">The algorithm is simple: treat the image you're trying to render as a virtual "film plane", place it in your 3D scene, and send a ray of light through each pixel, bouncing it around the scene and accumulating color values with each bounce. This ends up being pretty easy, because light travels in a straight line.</p>
+                        <p align="left">For our final project for Brown's PHYS1100 course, "General Relativity", me and my fellow Brown student Alex Lawson decided to answer the question, "what if light doesn't travel in a straight line?".</p>
+                        <p align="left">In particular, we decided to try to raytrace scenes that had a black hole in them. The black hole warps spacetime in such a way that light bends around its singularity, creating a beautifully haunting fisheye-looking effect known as "gravitational lensing".</p>
+                        <p align="left">To understand how we implemented this project, you'll need to know a bit of General Relativity, the brainchild of Albert Einstein that changed our notions of space, time, and gravity forever.</p>
+                        <p align="left">Einstein kicks off the theory of General Relativity with the statement that space and time are really one thing, "spacetime", which is a four-dimensional object called a manifold. It's called four-dimensional because it has three spatial dimensions and one time dimension. To know where you are in spacetime, you have to know where you are as an (x, y, z) point in space, and what time "t" it is. In this sense, your location in spacetime is (t, x, y, z).</p>
+                        <p align="left">You can think of a manifold kind of like a surface, like a sphere or a plane. A sphere is a two dimensional manifold, but to see a sphere, you need to have three dimensions—how could you put all of a sphere on a piece of paper without unwrapping it? In this same way, four-dimensional spacetime can only be seen as a surface from a five-dimensional perspective. As lowly beings who only experience three of the dimensions in a way that isn't just "always moving forward" like the way we perceive time, we'd be really hard-pressed to visualize what our 4D spacetime looks like as a geometric object. Nonetheless, we can come up with examples that, while not entirely accurate, get the idea across.</p>
+                        <p align="left">If there was no matter in our universe—nothing with mass—then spacetime would be flat, like the surface of a trampoline. The key statement of General Relativity is that when you put an object with mass into spacetime, spacetime "warps" around it. To continue the trampoline analogy, this is like what happens when you put a heavy ball in the middle of the trampoline and see the trampoline surface bend under its weight.</p>
+                        <p align="left">The mathematical object that encodes the curvature of a manifold is known as the metric. The Einstein equation relates the metric to something called the stress-energy tensor, which you can think of as a way of representing the matter distributed across the universe. When you solve Einstein's equation, you are looking for a metric that satisfies the equation, given a particular stress-energy tensor.</p>
+                        <p align="left">The simplest solution to the Einstein equation is that of the Schwarzschild metric, and when it was discovered (three weeks after Einstein published his theory of General Relativity) it was already a representation of remarkable new physics: it represents a non-rotating black hole.</p>
+                        <p align="left">It turns out that things on the manifold of spacetime like matter and light move along particular paths. These paths are called "geodesics", and they're the shortest paths between two points on the manifold. For instance, a geodesic on a plane is just a straight line.</p>
+                        <p align="left">The geodesics on a manifold are solutions to a second-order differential equation known as the geodesic equation. To figure out how an object moves in curved spacetime, you just need to solve the geodesic equation with the right initial conditions.</p>
+                        <p align="left">Light follows a particular subset of geodesics called "null" geodesics—these are geodesics for which the right hand side of the geodesic equation is zero. So, to figure out how light moves around a black hole, we can find the geodesic equation for the Schwarzschild metric, and solve it numerically to find the null geodesics—this is the analogue of "tracing rays" in the usual flat-space raytracing algorithm.</p>
+                        <p align="left">Of course, this ends up being wildly computationally expensive, so to make things go faster, we set up a static scene where an image is placed some distance behind a black hole. For each pixel in the image we wanted to render, we marched rays of light around the scene using the geodesic equation until they either fell into the black hole or hit the image behind the black hole. We recorded which pixel each pixel in the output rendered image corresponded to in the image behind the black hole, and used this data to generate a lookup table. In this way, we can run the rendering algorithm once to generate the table, then use the lookup table to place any image behind the black hole.</p>
+                        <p align="left">The results? Pretty cool!</p>
+                        <img src="img/portfolio/black-holes/stars-2-bh.png" class="img-responsive img-centered" alt="">
+                        <img src="img/portfolio/black-holes/stars-1-bh.png" class="img-responsive img-centered" alt="">
+                        <p align="left">Want to see the code? This is a private repo on <a href="https://github.com/bguesman">github</a> for academic code reasons. Contact me and I can give you access!</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clouds -->
+            <div class="portfolio-modal modal fade" id="portfolioModal17" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                  <div class="lr">
+                    <div class="rl">
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <div class="modal-body">
+                        <h2>Virtual Sky</h2>
+                        <h3>Physically Based Simulation of Cumuliform Clouds Using Computational Fluid Dynamics</h3>
+                        <hr class="star-primary">
+                        <img src="img/portfolio/clouds/moody.png" class="img-responsive img-centered" alt="">
+                        <p align="left">For the culminating project of Brown's CS224 course, "Advanced Computer Graphics", I worked with my fellow Brown students Vicki Tan and <a href="kelly-wang.com/about/">Kelly Wang</a> to implement <a href="https://pdfs.sematicscholar.org/f398/7e9e83fe0a969be249ef23ad187ec713dc94.pdf">R. Miyazaki's seminal cloud simulation paper</a>. Over the course of six weeks, we studied, understood, and implemented the algorithm described in the paper from scratch. In fact, we even fixed a part of it.</p>
+                        <p align="left">Before I dig into the details, I should note that this was all done in C++ with QtCreator.</p>
+                        <h3 align="left">To Make Clouds, You Need Air</h3>
+                        <p align="left">Physically-based cloud simulation starts with physically-based fluid simulation: after all, clouds are a product of atmospheric fluid dynamics. The famous Navier-Stokes equations govern the macroscopic motion of a fluid. They are based on a key observation: to completely describe the state of a body of fluid at some point in time, all you need to know is its velocity at every point in space. Because of this, they model the fluid as a vector field of velocities, and describe how that vector field evolves with time.</p>
+                        <p align="left">The Navier-Stokes equations, in their full form, are a huge tensorial monster that can get very complex (in fact, it's still not known if solutions always exist in certain configurations). To make things easier on ourselves, we make two key assumptions.</p>
+                        <p align="left"> First, we assume that the fluid is "isotropic", meaning that the way it responds to stress is the same in each direction. This lets us reduce the stress tensor to basically one number.</p>
+                        <p align="left"> b) "incompressible", meaning that, roughly, the density of the fluid in a unit volume doesn't change unless more mass is added to the volume.</p>
+                        <p align="left">The first Navier-Stokes equation states that the field is divergenceless, which, coupled with the incompressibility assumption, can be shown to imply that the flow conserves mass.</p>
+                        <p align="left">The second Navier-Stokes equation is basically a list of the accelerations that the fluid experiences. These include a) external accelerations, like gravity, b) an acceleration that moves fluid from areas of high to low pressure, c) a "diffusive" acceleration that reduces the differences between neighboring velocities in accordance with a "viscosity" parameter, and d) an "advective" acceleration that compensates for the fluid velocity being transported through space by itself during the interval used to calculate the time derivative.</p>
+                        <h3 align="left">Stable Fluids</h3>
+                        <p align="left">To simulate the Navier-Stokes equations for incompressible isotropic flow, we used the (now classic) semi-Lagrangian scheme developed by Jos Stam back in the early 2000's. This isn't necessarily the most accurate strategy for fluid simulation, but it is preferred for simulating atmospheric fluid dynamics because it is unconditionally stable. This means that you can make the time step as big as you want without the simulation "blowing up", something necessary to make simulating the large time scales associated with atmospheric fluid dynamics computationally tractable.</p>
+                        <p align="left">We represent the simulation space with a voxel grid—you can think of this as a big grid of little cubes, each of which has an associated velocity value (a natural discretization of a vector field). During a single time-step, Stam's method separates out each of the accelerations and applies them to the velocity field sequentially. External accelerations are applied via a simple first-order forward integration. Pressure and diffusion are formulated as sparse linear systems, which are solved using a sparse solver.</p>
+                        <p align="left">Where Stam's method really gets innovative is in the advection step. To account for the velocity of the fluid in a voxel being transported by itself, Stam proposes that we imagine a particle from that voxel being traced backward in time to a previous place in the grid. We then sample the velocity at this place in the grid, and then use that as the velocity for our voxel. From this description, it's clear why the method is unconditionally stable: it only ever interpolates velocity values that are already in the grid, so it can never "blow up" to hugely positive or hugely negative values.</p>
+                        <p align="left">To implement semi-Lagrangian advection, we had to implement a voxel grid class in C++ that could be sampled at non-integer points and store its data in a way that was conducive to being used in sparse-matrix computations. Using the Eigen math library, we stored the entire grid as a one-dimensional vector in x-major/y-middle/z-minor order, and wrote an accompanying discrete derivatives class that generated the appropriate discretized vector calculus operators as matrices that could multiply this 1D vector. We then used the Eigen SparseLU solver to implement the diffusion and pressure steps. We exposed access to individual points in the grid via a sampling function that tri-linearly interpolated between grid cells. This made back-sampling for the advection step easy and readable.</p>
+                        <p align="left">Here's a fun little animation we rendered of a high-vorticity fluid to demonstrate our implementation of Stam's method. To generate it, we wrote out the voxel grid to a file using OpenVDB, and rendered it using Maya/Arnold.</p>
+                        <img src="img/portfolio/clouds/vortexconverted.gif" class="img-responsive img-centered" alt="">
+                        <p align="left">Semi-Lagrangian advection is pretty cool, but it's not without its faults. It is not inherently mass-conserving (though it can be made to be), and it also can have trouble handling particular boundary conditions, as we found out painfully during our implementation process.</p>
+                        <h3 align="left">The Physics Of Cloud Formation</h3>
+                        <p align="left">Once you've got a fluid simulator, making the transition to cloud simulation is only a matter of making a few extensions.</p>
+                        <p align="left">The broad strokes explanation for how clouds form is easy enough to understand. The sun heats the ground. This creates a buoyant force, transporting water vapor up higher into the atmosphere. As it moves upwards, its temperature decreases—a process known as "adiabatic cooling". Once its temperature decreases enough, it is too cold to remain as water vapor, so it condenses into water droplets: clouds. When water vapor is converted into water droplets, it releases latent heat, which results in additional buoyant force that transports the water droplets and remaining vapor even further skyward, creating the puffy cloud tops we're all familiar with.</p>
+                        <p align="left">Ok, cool, so that's how it works. Now how do we simulate it?</p>
+                        <p align="left">To start, we're going to need to store more data. In particular, we'll need voxel grids to store cloud density, vapor density, and temperature. These will be transported around the simulation space via the velocity field, using semi-Lagrangian advection.</p>
+                        <p align="left">To model bouyancy, we'll apply an additional force to the velocity field in the upward direction that is proportial to the difference between the temperature and the "ambient temperature" (which we'll set for each cell in the grid beforehand and which will remain constant with time) at a point. We'll simulate the heating of the ground by placing a heat source along the bottom of the simulation space.</p>
+                        <p align="left">Adiabatic cooling is easy enough—just increase or decrease the temperature of a grid cell in a way that's proportional to its upward velocity.</p>
+                        <p align="left">The phase transition gets a little trickier. We can define a quantity called the "saturation vapor density" that depends on temperature. If there's more vapor in a cell than its saturation vapor density, then some of that excess vapor starts getting converted to clouds. If there's less, then whatever cloud density is there starts getting converted back to vapor. Seems simple enough, right? Turns out the Miyazaki paper got it wrong, and the way they calculated saturation vapor density guaranteed that no clouds would ever form. We had to make a slight modification to the equation to ensure that it modeled the correct behavior.</p>
+                        <p align="left">Finally, to ensure that we don't lose small-scale detail to the smoothing effect of semi-Lagrangian advection, we'll apply a force that encourages areas of the fluid with high curl to continue swirling—a well-known augmentation to Stam's method known as "vorticity confinement".</p>
+                        <p align="left">So, if you manage to do all that correctly, you'll be able to generate physically based clouds. Of course, chances are, instead you'll run into...</p>
+                        <h3 align="left">Bugs</h3>
+                        <p align="left">We thought we were close to being done once we'd written all the code. In reality, we spent more time debugging the simulation than we did writing it. Such is the nature of code that takes an incredibly long time to run and can't really be unit-tested. Truth be told, there were more bugs than I have space to write about here, but I'll document some of the key ones.</p>
+                        <p align="left">One bug we encountered was some twist on the classic off-by-one error: we had a mistake in the way we were converting from physical "world space" (in meters) to non-physical index space (grid cell numbers). We had forgetten to account for the fact that we were assuming that the representative point for grid cells was in their center, not their bottom-left corner.</p>
+                        <p align="left">Another issue stemmed from the way we handled advection steps outside the simulation space. We initially just clamped the sample point to lie inside the grid, and used the value at that point. Upon further consideration, we realized this was completely wrong—you have to calculate the intersection of the advection path with the boundary it passes through, and use that point, or, better yet, bounce it off all boundaries it intersects until the full backward time-step is completed.</p>
+                        <p align="left">Perhaps the worst difficulty—though one that you might not necessarily call a bug—was determining and implementing the best boundary conditions for the voxel grids. We tried a number of different options, but all suffered from either artificial decrease or increase of total density. Ultimately, we opted to use a method that modeled collisions with the boundaries (a "reflective" boundary condition), and account for the density dissipation by adding a water vapor source at the bottom of the simulation space.</p>
+                        <p align="left">All in all, this was a very challenging project, and debugging the various boundary condition bugs and trying to make sense of the paper tested my patience more times than one. Ultimately though, it was massively rewarding when we were able to render some beautiful, realistic clouds!</p>
+                        <img src="img/portfolio/clouds/majestic.png" class="img-responsive img-centered" alt="">
+                        <img src="img/portfolio/clouds/swift.png" class="img-responsive img-centered" alt="">
+                        <img src="img/portfolio/clouds/clean.png" class="img-responsive img-centered" alt="">
+                        <img src="img/portfolio/clouds/hopeful.png" class="img-responsive img-centered" alt="">
+                        <p align="left">Want to see the code? This is a private repo on <a href="https://github.com/bguesman">github</a> for academic code reasons. Contact me and I can give you access!</p>
                         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                       </div>
                     </div>
