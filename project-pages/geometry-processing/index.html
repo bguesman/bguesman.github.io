@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+
+<html class="project">
+	<head>
+		<title>Geometry Processing</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="project">
+
+  <!-- Full-screen div image. -->
+  <div class="project-splash">
+		<img class="project-splash" style="margin-top: -10%;" src="images/geometry-processing.png"></img>
+		<h1 class="project-title" style="bottom: -2%;right:3%;">GEOMETRY PROCESSING</h1>
+  </div>
+
+	<!-- Writeup. -->
+	<div class="project-body">
+		<h2 class="project-body">Fundamental Geometry Processing Operations</h1>
+
+		<p class="project-body">For the second project in Brown's CS224 course, "Advanced Computer Graphics", we were tasked with implementing some fundamental mesh operations: subdivision, greedy decimation using a quadric error metric, and bilateral filtering.</p>
+
+		<p class="project-body">The bulk of the work of the project was bringing up an implementation of an acceleration data structure that allowed for fast mesh editing and traversal. I chose to implement a half-edge data structure, which, though ultimately more challenging to get right than something like a simple adjacency table, allows for cleaner implementations of the unit topology-altering operations necessary to implement the more complex processing algorithms.</p>
+
+		<p class="project-body">In particular, these operations are edge split, edge flip, and edge collapse. These were all fairly straightforward to puzzle out, though they required keeping track of a lot of pointers to implement correctly. Writing these was like something akin to writing a doubly linked-list deletion but ten times more complicated.</p>
+
+		<p class="project-body">Something that's important to note is that the half-edge data structure is only valid if the mesh it represents is "manifold". Roughly, a manifold mesh is one that perfectly encloses a volume. To guarantee this invariant, you need to be sure to prevent operations that destroy it from occuring. Luckily, there are constant time ways of detecting whether one of the three operations above will violate the manifold property.</p>
+
+		<p class="project-body">Want to see the code? This is a <a target="_blank" href="https://github.com/bguesman/geometry-processing">private repository on GitHub</a> for academic code reasons. Email me and I can give you access (as long as you're not a student at Brown in CS224!).</p>
+
+		<div class="project-body-img-block">
+			<div class="project-body-img-row">
+				<div class="project-body-img-col">
+					<img class="project-body-img" style="max-width:1440px;" src="images/bunny-denoise-text.png"></img>
+				</div>
+			</div>
+			<p class="project-body-caption">An example of multiple iterations of bilateral filtering on a high poly but very noisy bunny mesh. Note how the noise disappears, but much of the relevant detail is preserved.</p>
+		</div>
+
+		<div class="project-body-img-block">
+			<div class="project-body-img-row">
+				<div class="project-body-img-col">
+					<img class="project-body-img" src="images/cow-subsurf-text.png"></img>
+				</div>
+				<div class="project-body-img-col">
+					<img class="project-body-img" src="images/ico-subsurf-text.png"></img>
+				</div>
+			</div>
+			<p class="project-body-caption">Two examples of subdivision across multiple iterations.</p>
+		</div>
+
+		<div class="project-body-img-block">
+			<div class="project-body-img-row">
+				<div class="project-body-img-col">
+					<img class="project-body-img" style="max-width:1440px;" src="images/cow-decimate-text.png"></img>
+				</div>
+			</div>
+			<p class="project-body-caption">An example of multiple rounds of decimation on an initially high-poly cow mesh.</p>
+		</div>
+
+		<div class="project-footer">
+			<p>&copy; Brad Guesman.</p>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../assets/js/jquery.min.js"></script>
+		<script src="../../assets/js/browser.min.js"></script>
+		<script src="../../assets/js/breakpoints.min.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html class="project">
+	<head>
+		<title>Planetary Motion Sim</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="project">
+
+	  <!-- Full-screen div image. -->
+	  <div class="project-splash">
+			<img class="project-splash" style="margin-top: -10%;" src="images/planetary-motion-sim.png"></img>
+			<h1 class="project-title" style="bottom: -2%;right:3%; padding:10px; background-color: rgba(10, 10, 10, 0.98)">PLANETARY MOTION SIM</h1>
+	  </div>
+
+		<div class="project-body">
+			<h2 class="project-body">Newtonian Gravitation, Visualized in 2D</h2>
+
+			<p class="project-body">I had the idea to do a simulation of Newtonian gravity in VR using AFrame.io, but figured it would be a good idea to implement it as a 2-D project first and work out the kinks in that environment first. I never actually ended up implementing a WebVR version—I moved on to other projects instead. However, this still lurks in the back of my mind as a fun project, and maybe as an excuse to learn WebGL!</p>
+
+			<p class="project-body">For the modelling element, the program is spartan enough that all the computations can be done client side. The integrator is a simple application of Euler's method—I wrote this before I knew about more reliable methods like RK4. For the graphics element, I used <a target="_blank" href="https://p5js.org/">p5.js</a>.</p>
+
+			<p class="project-body">This project lives on the web. You can find it <a target="_blank" href="https://bguesman.github.io/planetary-motion-sim/">here</a>!</p>
+			<p class="project-body">Want to see the code? This is a <a target="_blank" href="https://github.com/bguesman/planetary-motion-sim">public repository on GitHub</a>!</p>
+
+		</div>
+
+		<div class="project-footer">
+			<p>&copy; Brad Guesman.</p>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../assets/js/jquery.min.js"></script>
+		<script src="../../assets/js/browser.min.js"></script>
+		<script src="../../assets/js/breakpoints.min.js"></script>
+
+	</body>
+</html>

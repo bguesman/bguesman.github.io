@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html class="project">
+	<head>
+		<title>Black Holes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="project">
+
+    <!-- Full-screen div image. -->
+    <div class="project-splash">
+			<img class="project-splash" style="margin-top: -16%;" src="images/black-holes.jpg"></img>
+			<h1 class="project-title" style="bottom: -2%;right:3%;">BLACK HOLE RAYTRACING</h1>
+    </div>
+
+		<div class="project-body">
+			<h2 class="project-body">Bringing a Classic Algorithm Into Curved Spacetime</h1>
+
+			<p class="project-body">Raytracing is a classic algorithm that leverages the properties of geometric light transport to calculate very convincing specular reflections. Nearly every student of graphics has implemented raytracing in one form or another—it's arguably the most well-known algorithm in computer graphics.</p>
+
+			<p class="project-body">The algorithm is simple: treat the image you're trying to render as a virtual "film plane", place it in your 3D scene, and send a ray of light through each pixel, bouncing it around the scene and accumulating color values with each bounce. This ends up being pretty easy, because light travels in a straight line.</p>
+			<p class="project-body">For our final project for Brown's PHYS1100 course, "General Relativity", me and my fellow Brown student Alex Lawson decided to answer the question, "what if light doesn't travel in a straight line?".</p>
+			<p class="project-body">In particular, we decided to try to raytrace scenes that had a black hole in them. The black hole warps spacetime in such a way that light bends around its singularity, creating a beautifully haunting fisheye-looking effect known as "gravitational lensing".</p>
+			<p class="project-body">To understand how we implemented this project, you'll need to know a bit of General Relativity, the brainchild of Albert Einstein that changed our notions of space, time, and gravity forever.</p>
+
+			<p class="project-body">Einstein kicks off the theory of General Relativity with the statement that space and time are really one thing, "spacetime", which is a four-dimensional object called a manifold. It's called four-dimensional because it has three spatial dimensions and one time dimension. To know where you are in spacetime, you have to know where you are as an (x, y, z) point in space, and what time "t" it is. In this sense, your location in spacetime is (t, x, y, z).</p>
+			<p class="project-body">You can think of a manifold kind of like a surface, like a sphere or a plane. A sphere is a two dimensional manifold, but to see a sphere, you need to have three dimensions—how could you put all of a sphere on a piece of paper without unwrapping it? In this same way, four-dimensional spacetime can only be seen as a surface from a five-dimensional perspective. As lowly beings who only experience three of the dimensions in a way that isn't just "always moving forward" like the way we perceive time, we'd be really hard-pressed to visualize what our 4D spacetime looks like as a geometric object. Nonetheless, we can come up with examples that, while not entirely accurate, get the idea across.</p>
+
+			<p class="project-body">If there was no matter in our universe—nothing with mass—then spacetime would be flat, like the surface of a trampoline. The key statement of General Relativity is that when you put an object with mass into spacetime, spacetime "warps" around it. To continue the trampoline analogy, this is like what happens when you put a heavy ball in the middle of the trampoline and see the trampoline surface bend under its weight.</p>
+			<p class="project-body">The mathematical object that encodes the curvature of a manifold is known as the metric. The Einstein equation relates the metric to something called the stress-energy tensor, which you can think of as a way of representing the matter distributed across the universe. When you solve Einstein's equation, you are looking for a metric that satisfies the equation, given a particular stress-energy tensor.</p>
+			<p class="project-body">The simplest solution to the Einstein equation is that of the Schwarzschild metric, and when it was discovered (three weeks after Einstein published his theory of General Relativity) it was already a representation of remarkable new physics: it represents a non-rotating black hole.</p>
+			<p class="project-body">It turns out that things on the manifold of spacetime like matter and light move along particular paths. These paths are called "geodesics", and they're the shortest paths between two points on the manifold. For instance, a geodesic on a plane is just a straight line.</p>
+
+			<p class="project-body">The geodesics on a manifold are solutions to a second-order differential equation known as the geodesic equation. To figure out how an object moves in curved spacetime, you just need to solve the geodesic equation with the right initial conditions.</p>
+			<p class="project-body">Light follows a particular subset of geodesics called "null" geodesics—these are geodesics for which the right hand side of the geodesic equation is zero. So, to figure out how light moves around a black hole, we can find the geodesic equation for the Schwarzschild metric, and solve it numerically to find the null geodesics—this is the analogue of "tracing rays" in the usual flat-space raytracing algorithm.</p>
+			<p class="project-body">Of course, this ends up being wildly computationally expensive, so to make things go faster, we set up a static scene where an image is placed some distance behind a black hole. For each pixel in the image we wanted to render, we marched rays of light around the scene using the geodesic equation until they either fell into the black hole or hit the image behind the black hole. We recorded which pixel each pixel in the output rendered image corresponded to in the image behind the black hole, and used this data to generate a lookup table. In this way, we can run the rendering algorithm once to generate the table, then use the lookup table to place any image behind the black hole.</p>
+			<p class="project-body">The results? Pretty cool!</p>
+			<p class="project-body">Want to see the code? This is a <a target="_blank" href="https://github.com/bguesman/black-hole-raytracing">public repository on GitHub</a>!</p>
+
+			<div class="project-body-img-block">
+				<div class="project-body-img-row">
+					<div class="project-body-img-col">
+						<img class="project-body-img" src="images/stars-1-bh.png"></img>
+					</div>
+				</div>
+				<div class="project-body-img-row">
+					<div class="project-body-img-col">
+						<img class="project-body-img" src="images/stars-2-bh.png"></img>
+					</div>
+				</div>
+				<p class="project-body-caption">A couple of results from the project.</p>
+			</div>
+		</div>
+
+		<div class="project-footer">
+			<p>&copy; Brad Guesman.</p>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../assets/js/jquery.min.js"></script>
+		<script src="../../assets/js/browser.min.js"></script>
+		<script src="../../assets/js/breakpoints.min.js"></script>
+
+	</body>
+</html>
