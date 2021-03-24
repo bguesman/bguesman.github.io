@@ -14,369 +14,94 @@
 
   <!-- Full-screen div image. -->
   <div class="project-splash">
-		<img class="project-splash" style="margin-top: -11%;" src="images/sun-earth-high.png"></img>
+		<img class="project-splash" style="margin-top: -11%;" src="images/reference_match_2.jpg"></img>
 		<h1 class="project-title" style="bottom: -2%;right:3%;">EXPANSE</h1>
   </div>
 	<!-- Writeup. -->
 	<div class="project-body">
 		<h2 class="project-body">Realtime Physically-Based Skies and Atmospheres In Unity</h2>
 
-		<p class="project-body">Update: as of September 2020, I have started work to incorporate procedural volumetric clouds into Expanse! When I lived in Madison during the summer, the cloudscapes would tower high above your head, presenting themselves almost as if they were the throne of God. So many procedural cloud systems fail to capture the solidity of huge cumuliform cloud formations. I'm hoping to come even a little bit close to recreating such an awe-inspiring natural phenomenon. Here's an early experiment showing a small taste of what's to come...</p>
-
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" style="width:55%;"src="images/clouds/cloud-2.png"></img>
-				</div>
-			</div>
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" style="width:55%;"src="images/clouds/clouds-take-1.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Clouds!</p>
-		</div>
-
 		<p class="project-body">Ever since working on <a target="_blank" href="../virtual-sky/index.html">Virtual Sky</a> and playing through the stunningly beautiful <a target="_blank" href="https://www.youtube.com/watch?v=TIx4u1JTRV4">Zelda: Breath of the Wild</a>, I've had a deepened appreciation for digital emulations of the Earth's atmosphere. Skies aren't just pretty—they're emotional. We have such strong associations with sunsets, sunrises, clear blue mornings and stormy evenings. To communicate those primal feelings in the digital medium is no small task.</p>
 
 		<p class="project-body">I first had the idea for this project as I was slogging through the Vulkan tutorial, fantasizing about what cool stuff I could do once I had written and (hopefully) understood the 2000 or so lines of boilerplate necessary to get a triangle mesh to show up on the screen. I was playing a lot of <a target="_blank" href="https://www.youtube.com/watch?v=wvQV8xuJAjA">The Witcher III's "Blood and Wine" DLC</a> at the time, and was enamored with the vast, teal skydome that floats over the Duchy of Toussaint. In particular, I was curious about the fluffy clouds that dotted the sea of infinite blue—how do you render convincing clouds in realtime?</p>
 
-		<p class="project-body">I figured I could get to clouds later, and that first I'd implement a sky model. My initial thought was to go with something I could bring up quickly, like the analytical <a target="_blank" href="https://cgg.mff.cuni.cz/projects/SkylightModelling/">Hosek-Wilkie model</a>. As I started doing more research though, I stumbled upon the <a target="_blank" href="http://nishitalab.org/user/nis/cdrom/sig93_nis.pdf">strategy first proposed by Nishita in 1993</a>. The approach is a physically-based approximation of the scattering behavior of light through different layers of the atmosphere. The result is a beautiful, fully parameterizable sky model that allows for simulation of the sky not just here on Earth, but on all sorts of different imagined alien worlds.</p>
+		<p class="project-body">Turns out that it's not so easy. If you're familiar with path-tracing, you know how computationally expensive it is to accurately simulate the illumination of 2D surfaces. With volumes of gas, like clouds and the atmosphere, you're adding a whole new dimension to the rendering equation. It can take hours, sometimes even days, to simulate light transport through a complex volume. In a realtime digital experience, we have milliseconds.</p>
 
-		<p class="project-body">This sounded right up my alley. It also sounded like it would be a little bit of a pain to implement in Vulkan, so I opted to instead implement it as a custom shader in Unity (looking back, it's debatable if this actually made things any easier). My plan was to release it as an asset for sale on the Unity asset store—we'll see why that didn't exactly pan out later.</p>
+		<p class="project-body">There's also the question of modeling. Modeling the atmosphere isn't so challenging---it's easy enough to construct analytical approximations that are accurate enough for our purposes. Clouds are a different story: they get their unique shapes from the complex drama of fluid dynamics and heat dispersion playing out in the sky. While it's possible to simulate this so that it looks convincing from far away, a huge part of what really imbues clouds with a sense of scale is all of their small tendrils and swirls. Running a fluid simulation at a high enough resolution to capture these details is just too expensive in the context of a realtime application.</p>
 
-		<p class="project-body">I started out by implementing Nishita's paper directly, but quickly realized that to get a really good result I'd need to roll in some more recent work. I ended up following the paper trail of Sebastien Hillaire, realtime volumetric rendering guru and author on the latest edition of <a target="_blank" href="https://www.realtimerendering.com/">Realtime Rendering</a>. In particular, I followed a lot of the advice in his <a target="_blank" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf">report on physically based skies in EA's Frostbite Engine</a>, and implemented his recent paper on <a target="_blank" href="https://sebh.github.io/publications/egsr2020.pdf">isotropic approximations to multiple scattering</a>, which forms the basis for <a target="_blank" href="https://www.youtube.com/watch?v=SeNM9zBPLCA">Unreal Engine's latest sky sim solution</a>.</p>
+		<p class="project-body">At first glance the problem seems intractable. However, as you can imagine, there's been a lot of effort put into solving it.</p>
 
-		<p class="project-body">So what exactly does Expanse do? How does it work, and what is it capable of?</p>
+		<p class="project-body">The model I chose to implement for the atmosphere is based on <a target="_blank" href="https://sebh.github.io/publications/egsr2020.pdf">Sebastien Hillaire's 2020 EGSR paper</a>. The key realization he makes that differentiates this work from its predecessors is that multiple scattering behavior in Earth's atmosphere is low-frequency---it doesn't change very quickly across the sky. Because of this, you can get away with pre-computing and caching a sort of global approximation to the multiple scattering contribution, and composite it on top of the local single-scattering result.</p>
 
-		<h3 class="project-body">How It Works</h3>
-
-		<p class="project-body">Expanse is, first and foremost, a physically-based simulation of the atmosphere of a planet. To understand how Expanse works, we have to understand a bit about Earth's atmosphere.</p>
-
-		<p class="project-body">The atmosphere on Earth is a composition of all sorts of different gases and particulates, moving around in all sorts of complicated ways. A full description of it would be extremely complex (and would finally allow us to predict the weather). Luckily, the only requirement of our model is that it looks visually plausible, so we can rely on a much simpler understanding of the atmosphere.</p>
-
-		<p class="project-body">For Expanse, the atmosphere consists of three different kinds of gases: <b>air</b>, <b>aerosols</b>, and <b>ozone</b>.</p>
-
-		<p class="project-body">Air is the combination of all of the gases in the atmosphere that are significantly smaller than the wavelength of visible light—things like nitrogen and oxygen. There's way more of these gases near the Earth's surface than there is near the edge of the atmosphere, so we can model their density distribution as exponentially decreasing with the height above sea level. When light interacts with them, it scatters according to the Rayleigh phase function. Coupled with absorption and scattering coefficients specific to the mixture of gases, this scattering function results in the blue color of the sky.</p>
-
-		<p class="project-body">Aerosols are all the particles in the atmosphere that are bigger than the wavelength of visible light—things like smoke, smog, and water vapor. For instance, the aerosol content in the air over a city is generally much higher than in a rural landlocked area due to manmade pollution. These particles are also generally concentrated close to the ground, so we can also model their density as exponentially decreasing with height above sea level. They interact with light according to the Mie phase function and also have specific absorption and scattering coefficients. Visually, they create the effect of haze or fog, and are responsible for the halo around the sun and for some of the colors at sunset.</p>
-
-		<p class="project-body">The ozone is a layer of gases concentrated high up in the atmosphere, around 25km above sea level. It only absorbs light—it does not scatter light. It accounts for a relatively small portion of the atmosphere, but is important to model because it contributes to the depth of the blueness of the daytime sky, and to the red/purple colors sometimes present at sunset. Many sky simulations don't model the ozone, as as such end up lacking blueness.</p>
-
-		<p class="project-body">Expanse renders the atmosphere by sending out rays toward the sky and sampling the atmosphere densities along those rays to compute transmission and scattering factors. Instead of doing this every frame, Expanse computes these factors once for a multitude of light directions, view directions, and observer positions, and stores them in tables that can be sampled from at runtime. This means that Expanse operates at a near-negligible per-frame cost.</p>
-
-		<p class="project-body">Some parameter changes will require the tables to be updated. However, these updates can be amortized over the course of multiple frames if need be, since skies usually do not change dramatically enough to require frame-to-frame updates.</p>
-
-		<p class="project-body">Any atmosphere rendering solution also requires a model of the ground. Expanse uses the simple strategy of simulating the ground as as diffuse and emissive sphere. This is certainly an area for improvement—in the context of a full game engine, it would make sense to integrate this model with the existing terrain solution.</p>
-
-		<h3 class="project-body">Results</h3>
-
-		<p class="project-body">Before diving into showcases of specific features, let's just look at some skies!</p>
-
-		<p class="project-body">All of the following images have no artistic overrides or post-processing applied. Everything you see is purely a result of the physically-based model.</p>
+		<p class="project-body">The model does have some drawbacks---for one, it's extremely expensive to model fog with volumetric shadows. So I made a few modifications based on the now classic <a target="_blank" href="https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-13-volumetric-light-scattering-post-process">Volumetric Scattering as a Post-Process article</a>. The final results are pretty convincing!</p>
 
 		<div class="project-body-img-block">
 			<div class="project-body-img-row">
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/sunset-1.png"></img>
+					<img class="project-body-img" src="images/with_isotropic_fog.jpg"></img>
 				</div>
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/daytime.png"></img>
+					<img class="project-body-img" src="images/tint_via_coefficients.jpg"></img>
 				</div>
 			</div>
 			<div class="project-body-img-row">
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/sun-earth-high.png"></img>
+					<img class="project-body-img" src="images/ms_1x.jpg"></img>
 				</div>
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/rising-moon.png"></img>
+					<img class="project-body-img" src="images/occlusion_0.5.jpg"></img>
 				</div>
 			</div>
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/fiery-sunset.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/milky-way-on-the-horizon.png"></img>
-				</div>
-			</div>
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/light-pollution.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/day-moon.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Some stills rendered with Expanse. These stills have no artistic overrides applied—all colors and illumination are results of the physically-based model.</p>
+			<p class="project-body-caption">A few examples of what Expanse's atmosphere model can do.</p>
 		</div>
 
-		<p class="project-body">Now that that's out of the way, let's take a look at some of the specific things that Expanse can do!</p>
+		<p class="project-body">The cloud model is based largely on Andrew Schneider's work on the <a target="_blank" href="http://www.advances.realtimerendering.com/s2017/Nubis%20-%20Authoring%20Realtime%20Volumetric%20Cloudscapes%20with%20the%20Decima%20Engine%20-%20Final%20.pdf">Horizon: Zero Dawn and the Nubis cloud system</a>. The general modeling strategy is to use successively more detailed volumetric noise textures to build the cloud density field. Then, to light the clouds, successive attenuation approximations are applied to the base luminance to mimick the ground truth complex multiple scattering behavior. I chose to also incorporate some of the more physically-based elements of <a target="_blank" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf">Sebastien Hillaire's cloud lighting model for the Frostbite engine</a>.</p>
 
-		<p class="project-body">Because of the lookup table representation and the ray-casting strategy used in Expanse, it's easy to render images from anywhere in Earth's atmosphere, including from space.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/earth-dramatic.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/earth-outer-space.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">The Earth from outer space, rendered with Expanse.</p>
-		</div>
-
-		<p class="project-body">Expanse also provides support for up to four celestial bodies. These can be emissive like a sun, diffuse reflectors like a moon, or some combination of both like... I don't know, some kind of lava planet?</p>
-		<p class="project-body">All emissive celestial bodies contribute to the light scattered into the atmosphere, and thus effect the color of the sky.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/in-the-shadow-of-giants.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/earth-and-moon.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">A few examples showcasing Expanse's support for multiple diffuse celestial bodies.</p>
-		</div>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/behemoth-and-the-messenger-alternate-angle.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/aesthetic/tatooine.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Expanse can also handle multiple emissive celestial bodies, making for some cool Luke Skywalker moments.</p>
-		</div>
-
-		<p class="project-body">All the examples so far have shown skies with an atmospheric content very similar to Earth's, but Expanse is capable of simulating far more alien skies. For instance, here's what it looks like when we vary the density of the air layer.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/air-density/air-density-0.1x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/air-density/air-density-0.5x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/air-density/air-density-1x.png"></img>
-				</div>
-			</div>
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/air-density/air-density-2x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/air-density/air-density-5x.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Left to right, top to bottom: 0.1x typical Earth air density, 0.5x density, 1x density, 2x density, and 5x density.</p>
-		</div>
-
-
-		<p class="project-body">And here's varying the density of the aerosol layer. The aerosol density across the Earth varies quite a bit, as opposed to the air density, so the following images all represent plausible Earth skies.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/aerosol-density/aerosol-density-0.1x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/aerosol-density/aerosol-density-0.5x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/aerosol-density/aerosol-density-1x.png"></img>
-				</div>
-			</div>
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/aerosol-density/aerosol-density-2x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/aerosol-density/aerosol-density-5x.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Left to right, top to bottom: 0.1x typical Earth aerosol density, 0.5x density, 1x density, 2x density, and 5x density. The aerosol density across the Earth varies quite a bit, so these images all represent plausible Earth skies. For instance, the top left image could be a clear day in a small town, or the bottom right could be a desert in the middle of a sandstorm.</p>
-		</div>
-
-		<p class="project-body">And finally, here's varying the density of the ozone layer.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-0x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-0.15x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-0.3x.png"></img>
-				</div>
-			</div>
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-0.5x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-0.75x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-1x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/ozone-density/ozone-density-2x.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Left to right, top to bottom: 0x default ozone density, 0.15x density, 0.3x density, 0.5x density (a reasonable value for many Earth skies), 0.75x density, 1x density, and 2x density. The ozone layer's effect is most pronounced at sunset, where it has the potential to bring out very saturated purples and reds.</p>
-		</div>
-
-		<p class="project-body">A key element of the sky when trying to render urban environments is light pollution. Expanse is equipped with a way of approximating light pollution that's based on how it actually works: light from the ground scattered into and then back out of the atmosphere.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/light-pollution/no-light-pollution.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/light-pollution/light-pollution.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Left: no light pollution. Right: with light pollution. Expanse is able to simulate different colors of city light, but as of now is unable to vary the light pollution across the sky.</p>
-		</div>
-
-		<p class="project-body">The fact that the sun is a sphere results in an effect called "limb darkening" that gives the sun disk a sort of darkened edge in the sky. Expanse is equipped with an analytical model to simulate this effect.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/limb-darkening/no-ld.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/limb-darkening/ld-1x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/limb-darkening/ld-10x.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Left to right: no limb darkening, physically correct limb darkening, exaggerated limb darkening. It's a fairly subtle effect, but can create a very nice stylized look at higher settings.</p>
-		</div>
-
-		<p class="project-body">Expanse implements <a target="_blank" href="https://sebh.github.io/publications/egsr2020.pdf">Sebastien Hillaire's 2020 paper</a> on isotropic approximations to multiple scattering. While single scattering is responsible for the bulk of the sky color, multiple scattering cannot be ignored if a visually convincing result is desired without the use of artistic overrides. Hillaire's algorithm is efficient and extremely accurate.</p>
-		<p class="project-body">As a side note, Expanse also provides an artistic override to increase the amount of multiple scattering past what is physically accurate. Some pretty dreamy looking environments can be created by cranking this parameter.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/multiple-scattering/daytime/no-ms.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/multiple-scattering/daytime/ms-1x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/multiple-scattering/daytime/ms-4x.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Multiple scattering in the daytime sky. Left to right: no multiple scattering, physically accurate multiple scattering, 4x exaggerated multiple scattering. Notice that the odd greyish brown color present at the horizon without multiple scattering is replaced by a familiar light blue when multiple scattering is enabled. The sky as a whole also becomes brighter and bluer.</p>
-		</div>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/multiple-scattering/sunset/no-ms.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/multiple-scattering/sunset/ms-1x.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/multiple-scattering/sunset/ms-4x.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Multiple scattering in the evening. Left to right: no multiple scattering, physically accurate multiple scattering, 4x exaggerated multiple scattering. When multiple scattering is enabled, the dark orange umber near the horizon is softened to a purplish-red.</p>
-		</div>
-
-		<p class="project-body">Sometimes, as an artist, you would like to impart the flavor of physical accuracy while retaining the ability to stylize your result to be more expressive. Theoretically, artists should be able to modulate the ozone and air scattering coefficients to achieve a wide range of physically-based sky colors. However, sometimes this is not enough. Expanse provides an overall sky tint override for those occasions.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sky-tint/untinted.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sky-tint/deep-blue.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sky-tint/somewhere-in-the-tropics.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Expanse has a sky tint artistic override parameter to allow artists to create more exaggerated, stylized skies. Left to right: no tint, "deep blue", "somewhere in the tropics".</p>
-		</div>
-
-		<p class="project-body">I mentioned earlier that Expanse works by sampling a mathematical model of the atmosphere at various points. To get a convincing result, you usually need a lot of samples, and this makes updates to the precomputed sky lookup tables computationally expensive. These updates can be amortized over the course of many frames, since atmospheres typically change composition very gradually. But still, it would be nice to not have to worry about the sky ever using too many resources.</p>
-		<p class="project-body">Well, some features require more samples—for instance, since multiple scattering is a very subtle effect, it requires fewer samples than single scattering to look convincing. In Expanse, every sample count is tweakable, so you can tailor each part of the algorithm to meet your performance needs.</p>
-		<p class="project-body">But there's a better solution to this problem: distributing the samples we <i>do</i> take intelligently. If we sample the atmosphere at the points that matter most, we can get a great result with far fewer samples, and update the sky lookup tables much faster. This strategy is known as "importance sampling", and Expanse supports it. Using Expanse, you never have to worry about a model update being too costly.</p>
-		<p class="project-body">Below are a few examples of just how much of a difference importance sampling can make.</p>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/daytime/linear-t4-lp8-ss5-gi6-ms6-ms3.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/daytime/importance-t4-lp8-ss5-gi6-ms6-ms3.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/daytime/importance-10-all.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/daytime/linear-256-all.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Effect of importance sampling on the daytime sky. Left: default sampling used with a total of 32 samples. Middle Left: the same setup as Left, but using importance sampling. Middle Right: importance sampling with a total of 60 samples. Right: default sampling with a total of 1,536 samples (the "ground truth"). Importance sampling is able to get an almost exactly correct result using only 32 samples, where the default sampling tactic comes nowhere close with the same amount of samples.</p>
-		</div>
+		<p class="project-body">The results are pretty decent, but I think there's still room for improvement. Investigating a neural multiple scattering approximation based on some data collected while path-tracing a dense volume could prove interesting.</p>
 
 		<div class="project-body-img-block">
 			<div class="project-body-img-row">
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/sunset/linear-t4-lp8-ss5-gi6-ms6-ms3.png"></img>
+					<img class="project-body-img" src="images/dense_6_15.jpg"></img>
 				</div>
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/sunset/importance-t4-lp8-ss5-gi6-ms6-ms3.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/sunset/importance-10-all.png"></img>
-				</div>
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/sampling/sunset/linear-256-all.png"></img>
+					<img class="project-body-img" src="images/cloud_fog.jpg"></img>
 				</div>
 			</div>
-			<p class="project-body-caption">Effect of importance sampling on the daytime sky. Left: default sampling used with a total of 32 samples. Middle Left: the same setup as Left, but using importance sampling. Middle Right: importance sampling with a total of 60 samples. Right: default sampling with a total of 1,536 samples (the "ground truth"). The story is the same as above: importance sampling provides near-perfect results at a far lower cost.</p>
+			<div class="project-body-img-row">
+				<div class="project-body-img-col">
+					<img class="project-body-img" src="images/high_ball.jpg"></img>
+				</div>
+				<div class="project-body-img-col">
+					<img class="project-body-img" src="images/anisotropy_0.6.jpg"></img>
+				</div>
+			</div>
+			<p class="project-body-caption">A few examples of Expanse's procedural volumetric clouds.</p>
 		</div>
 
-		<p class="project-body">Finally, Expanse supports dithering to help reduce color banding, and MSAA 8x to get rid of those nasty jaggies.</p>
+		<p class="project-body">The clouds and atmosphere aren't Expanse's only features. No procedural sky model would be complete without stars, celestial bodies, and nebulae. I also chose to implement a physically-based reflectance model for Luna---you'd be surprised how important this is for nailing the disc-like appearance of the moon.</p>
+
 		<div class="project-body-img-block">
 			<div class="project-body-img-row">
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/dithering/no-dithering.png"></img>
+					<img class="project-body-img" src="images/moon.jpg"></img>
 				</div>
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/dithering/dithering.png"></img>
-				</div>
-			</div>
-			<p class="project-body-caption">Left: no dithering. Right: with dithering.</p>
-		</div>
-		<div class="project-body-img-block">
-			<div class="project-body-img-row">
-				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/msaa/no-msaa.png"></img>
+					<img class="project-body-img" src="images/banner_2.jpg"></img>
 				</div>
 			</div>
 			<div class="project-body-img-row">
 				<div class="project-body-img-col">
-					<img class="project-body-img" src="images/demonstrative/msaa/msaa.png"></img>
+					<img class="project-body-img" src="images/texture_stars.jpg"></img>
+				</div>
+				<div class="project-body-img-col">
+					<img class="project-body-img" src="images/atmo-night.jpg"></img>
 				</div>
 			</div>
-			<p class="project-body-caption">Above: no anti-aliasing. Below: with MSAA 8x. The moon is where it is most noticeable in this example.</p>
+			<p class="project-body-caption">Celestial bodies, stars, and nebulae in Expanse.</p>
 		</div>
 
-		<p class="project-body">All in all, it was a joy working on this project. I learned a lot of things I never expected to know. Ideally, I would release this publicly as a Unity asset on the asset store. However, to get this to integrate well with Unity's skybox system, I had to <b>hack the source code of the engine.</b></p>
-		<p class="project-body">This sounds very dramatic, but in reality I just had to set a single flag that passes some additional light data to the sky shader. I've reached out to the Unity support team to see if they can roll in this change to the source code permanently. But, until then, Expanse will remain a personal project.</p>
-		<p class="project-body">I'd love to come back and revisit this project. There are two main avenues of exploration I see laid out. One is to investigate integrating this better with the rest of the renderer, so that I can properly model occlusion by terrain and apply volumetric fog to distant objects. The other direction is procedural clouds, which is what I set out to do in the first place!</p>
-
-		<p class="project-body">Want to see the code? This is a <a target="_blank" href="https://github.com/bguesman/ExpanseSkyTests">public repository on GitHub</a>!</p>
+		<p class="project-body">My current plan is to release Expanse on the Unity asset store. You can visit the <a target="_blank" href="https://bguesman.github.io/docsify-test/#/">documentation</a> and <a target="_blank" href="https://bguesman.github.io/expanse-promo-site/">promo sites</a> to learn more about how Expanse works. Keep an eye out in the coming months for the release!</p>
 
 	</div>
 
